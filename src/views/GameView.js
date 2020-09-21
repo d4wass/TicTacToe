@@ -48,8 +48,6 @@ const GameViews = () => (
   <MyContext.Consumer>
     {({ state, handleMove, setPlayAgain }) => {
 
-      const winner = state.player1.result;
-
       return (
         <StyledWrapper>
           <StyledWrapperBoard>

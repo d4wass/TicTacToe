@@ -19,7 +19,8 @@ export class MyProvider extends Component {
     },
     figures: ['x', 'o'],
     fields: new Array(9).fill(""),
-    isModalOpen: false
+    isModalOpen: false,
+    gameEnd: false
   };
 
   handleMove = (index) => {
@@ -120,7 +121,8 @@ export class MyProvider extends Component {
         player2: {
           ...prevState.player2,
           turn: false
-        }
+        },
+        gameEnd: true
       }))
     }
 
@@ -135,12 +137,28 @@ export class MyProvider extends Component {
         player1: {
           ...prevState.player1,
           turn: false
-        }
+        },
+        gameEnd: true
       }))
     }
 
   }
 
+  setPlayAgain = () => {
+    this.setState((prevState) => ({
+      player1: {
+        ...prevState.player1,
+        turn: true,
+      },
+      player2: {
+        ...prevState.player2,
+        turn: false,
+      },
+      fields: new Array(9).fill(""),
+      isModalOpen: false,
+      gameEnd: false
+    }))
+  }
 
   // submitAI = () => {
   //   this.setState((prevState) => ({
@@ -167,7 +185,8 @@ export class MyProvider extends Component {
         handleInput: this.handleInput,
         handleRadio: this.handleRadioInput,
         handleModal: this.handleModal,
-        valideForm: this.valideForm
+        valideForm: this.valideForm,
+        setPlayAgain: this.setPlayAgain
       }}>
         {this.props.children}
       </MyContext.Provider>

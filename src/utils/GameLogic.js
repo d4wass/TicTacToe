@@ -1,4 +1,4 @@
-import React from 'react';
+
 // winner fields - row
 // 0,1,2
 // 3,4,5
@@ -14,7 +14,7 @@ import React from 'react';
 // 6,4,2
 //
 export const checkWinner = (fields) => {
-  //row
+  //row - game winner
   if (
     fields[0] === fields[1] &&
     fields[0] === fields[2] &&
@@ -50,7 +50,7 @@ export const checkWinner = (fields) => {
       return "x";
     }
   }
-  //column
+  //column - game winner
   if (
     fields[0] === fields[3] &&
     fields[0] === fields[6] &&
@@ -86,7 +86,7 @@ export const checkWinner = (fields) => {
       return "x";
     }
   }
-  // diagonal
+  // diagonal - game winner
   if (
     fields[0] === fields[4] &&
     fields[0] === fields[8] &&

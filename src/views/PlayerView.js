@@ -5,6 +5,7 @@ import AlertModal from "../components/AlertModal";
 import Button from "../components/Button";
 import PlayerSettings from "../components/PlayerSettings";
 import { MyContext } from "../context/index";
+import Title from "../components/atoms/Title"
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -20,13 +21,6 @@ const StyledFormWrapper = styled.form`
   display: flex;
 `;
 
-const StyledTitle = styled.h1`
-  font-size: 70px;
-  margin-bottom: 20px;
-  font-weight: 900;
-  color: #F4F4F8;
-  text-align: center;
-`;
 
 const StyledButton = styled(Button)`
   max-width: 250px;
@@ -54,7 +48,7 @@ const PlayerView = () => (
       return (
         <StyledWrapper>
           {context.state.isModalOpen && <AlertModal />}
-          <StyledTitle>Players Settings</StyledTitle>
+          <Title>Players Settings</Title>
           <StyledFormWrapper>
             <PlayerSettings id="player1" player={state.player1} fnInput={context.handleInput} fnRadio={context.handleRadio} figures={context.state.figures} />
             <PlayerSettings id="player2" player={state.player2} fnInput={context.handleInput} fnRadio={context.handleRadio} figures={context.state.figures} />

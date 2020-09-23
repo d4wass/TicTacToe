@@ -7,22 +7,21 @@ export const MyContext = React.createContext();
 export class MyProvider extends Component {
   state = {
     player1: {
-      name: "x",
+      name: "",
       result: 0,
-      figure: "x",
+      figure: "",
       turn: true,
       gameWinner: false
     },
     player2: {
-      name: "o",
+      name: "",
       result: 0,
-      figure: "o",
+      figure: "",
       turn: false,
       gameWinner: false
     },
     figures: ['x', 'o'],
     fields: new Array(9).fill(""),
-    // fields: ["x", "o", "x", "o", "", "", "", "x", "o"],
     isModalOpen: false,
     gameEnd: false,
     gameDraw: false,
@@ -32,8 +31,16 @@ export class MyProvider extends Component {
     }
   };
 
+
+
+  componentDidUpdate() {
+    if (this.state.gameType.pvc && this.state.player1.turn) {
+      this.handleConsole()
+    }
+  }
+
+
   handleConsole = (index) => {
-    console.log('działa');
     const { player1, player2, fields } = this.state;
     const updateBoard = fields;
     const updatePlayer1 = player1;
@@ -199,22 +206,43 @@ export class MyProvider extends Component {
   }
 
   setPlayAgain = () => {
-    this.setState((prevState) => ({
-      player1: {
-        ...prevState.player1,
-        turn: true,
-        gameWinner: false
-      },
-      player2: {
-        ...prevState.player2,
-        turn: false,
-        gameWinner: false
-      },
-      fields: new Array(9).fill(""),
-      isModalOpen: false,
-      gameEnd: false,
-      gameDraw: false,
-    }))
+    if (this.state.gameType.pvc) {
+      this.setState((prevState) => ({
+        player1: {
+          ...prevState.player1,
+          turn: false,
+          gameWinner: false
+        },
+        player2: {
+          ...prevState.player2,
+          turn: true,
+          gameWinner: false
+        },
+        fields: new Array(9).fill(""),
+        isModalOpen: false,
+        gameEnd: false,
+        gameDraw: false,
+      }))
+    } else {
+      this.setState((prevState) => ({
+        player1: {
+          ...prevState.player1,
+          turn: true,
+          gameWinner: false
+        },
+        player2: {
+          ...prevState.player2,
+          turn: false,
+          gameWinner: false
+        },
+        fields: new Array(9).fill(""),
+        isModalOpen: false,
+        gameEnd: false,
+        gameDraw: false,
+      }))
+    }
+
+
   }
 
   submitAI = () => {

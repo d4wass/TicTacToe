@@ -4,6 +4,8 @@ import { MyContext } from "../context/index";
 import Board from '../components/Board';
 import PlayerStats from "../components/PlayerStats";
 import Button from "../components/Button";
+import Title from "../components/atoms/Title";
+import Paragraph from "../components/atoms/Paragraph";
 
 const StyledWrapperBoard = styled.div`
   display: flex;
@@ -41,7 +43,7 @@ const StyledButtonWrapper = styled.div`
   align-items: center;
   align-self: center;
   position: absolute;
-  top: 20%;
+  top: 15%;
 `;
 
 const GameViews = () => (
@@ -64,18 +66,21 @@ const GameViews = () => (
           </StyledWrapperBoard>
           {state.gameEnd && (
             <StyledButtonWrapper>
-              {state.gameDraw ? <StyledTitle>Draw</StyledTitle> : <StyledTitle>Player {state.player1.gameWinner ? state.player1.name : state.player2.name} Wins</StyledTitle>}
+              {state.gameDraw ? (
+                <Title result>Draw</Title>
+              ) : (
+                <Title result>Player {state.player1.gameWinner ? state.player1.name : state.player2.name} Wins</Title>)}
               <StyledButton onClick={setPlayAgain}>Play Again</StyledButton>
             </StyledButtonWrapper>
           )}
           {
             state.player1.turn ? (
               <StyledButtonWrapper>
-                <StyledTitle>Turn: {state.player1.name}</StyledTitle>
+                <Title turnTitle>Turn: <Paragraph primary>{state.player1.name}</Paragraph></Title>
               </StyledButtonWrapper>
             ) : state.player2.turn ? (
               <StyledButtonWrapper>
-                <StyledTitle>Turn: {state.player2.name}</StyledTitle>
+                <Title turnTitle>Turn: <Paragraph secondary>{state.player2.name}</Paragraph></Title>
               </StyledButtonWrapper>
               ) : (
               null

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { MyContext } from '../context';
 import Button from './Button';
+import Title from './atoms/Title'
+import Paragraph from './atoms/Paragraph';
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -26,16 +28,6 @@ const StyledAlertWrapper = styled.div`
     width: 30vw;
 `;
 
-const StyledParagraph = styled.p`
-    color: #f4f4f8;
-    margin-bottom: 20px;
-`;
-const StyledTitle = styled.h5`
-    color: #fed766;
-    margin-bottom: 20px;
-    font-size: 30px;
-`;
-
 const StyledButton = styled(Button)`
     background-color: #fe4a49;
     color: #f4f4f8;
@@ -50,8 +42,8 @@ const AlertModal = ({ message }) => {
             {(context) => (
                 <StyledWrapper>
                     <StyledAlertWrapper>
-                        <StyledTitle>Error!</StyledTitle>
-                        <StyledParagraph>Błąd brakuje danych o graczach</StyledParagraph>
+                        <Title errorMsg>Error!</Title>
+                        <Paragraph>Błąd brakuje danych o graczach</Paragraph>
                         <StyledButton onClick={() => context.handleModal()}>Close</StyledButton>
                     </StyledAlertWrapper>
                 </StyledWrapper>

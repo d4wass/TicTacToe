@@ -27,7 +27,7 @@ const Board = ({ fields, moveFn, player1, player2, gameType, handleConsole }) =>
     {fields.map((field, index) => (
       <StyledField
         key={index}
-        onClick={gameType.pvc ? () => handleConsole(index) : () => moveFn(index)}
+        onClick={!gameType.pvc ? (() => moveFn(index)) : (() => handleConsole(index))}
         player1={player1.turn}
         player2={player2.turn}
       >

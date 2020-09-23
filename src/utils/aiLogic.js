@@ -21,8 +21,6 @@ export function bestMove(board, player1, player2) {
             }
         }
         board[move] = comp.figure;
-        console.log(board);
-        console.log(move)
         return move;
     }
   }

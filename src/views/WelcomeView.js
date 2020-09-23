@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
 import { MyContext } from "../context";
+import Title from '../components/atoms/Title'
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -34,20 +35,12 @@ const StyledButtonLink = styled.a`
   margin: 10px;
 `;
 
-const StyledTitle = styled.h1`
-  font-size: 70px;
-  margin-bottom: 20px;
-  font-weight: 900;
-  color: #F4F4F8;
-  text-align: center;
-`;
-
 const WelcomeView = () => (
   <MyContext.Consumer>
     {({submitAI}) => (
         <StyledWrapper>
         <StyledTitleWrapper>
-          <StyledTitle>TicTacToe Game</StyledTitle>
+          <Title>TicTacToe Game</Title>
         </StyledTitleWrapper>
         <StyledButtonWrapper>
           <StyledButtonLink as={Link} to='/players' player>

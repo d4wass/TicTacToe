@@ -1,16 +1,7 @@
 
 import { checkWinner } from './GameLogic';
 
-// Tic Tac Toe AI with Minimax Algorithm
-// The Coding Train / Daniel Shiffman
-// https://thecodingtrain.com/CodingChallenges/154-tic-tac-toe-minimax.html
-// https://youtu.be/I64-UTORVfU
-// https://editor.p5js.org/codingtrain/sketches/0zyUhZdJD
-
 export function bestMove(board, player1, player2) {
-    // AI to make its turn
-    // console.log(player1.figure)
-    // console.log(player2)
     const comp = player1;
     const player = player2
     let bestScore = -Infinity;
@@ -34,9 +25,6 @@ export function bestMove(board, player1, player2) {
         console.log(move)
         return move;
     }
-
-
-    // currentPlayer = human;
   }
 
   let scores = {
@@ -46,7 +34,6 @@ export function bestMove(board, player1, player2) {
   };
 
   function minimax(board, depth, isMaximizing, comp, player) {
-    // console.log(board)
     let result = checkWinner(board);
     if (result !== undefined) {
       return scores[result];

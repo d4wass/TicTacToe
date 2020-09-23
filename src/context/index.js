@@ -43,10 +43,8 @@ export class MyProvider extends Component {
     if (!player1.turn && !player2.turn) {
       return
     }
-    console.log(move)
-    console.log(updateBoard[move])
-    if (updatePlayer1.turn ) {
-      console.log('wpadam')
+
+    if (updatePlayer1.turn) {
       updateBoard[move] = updatePlayer1.figure;
       updatePlayer1.turn = false;
       updatePlayer2.turn = true;

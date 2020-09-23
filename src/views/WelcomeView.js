@@ -44,7 +44,7 @@ const StyledTitle = styled.h1`
 
 const WelcomeView = () => (
   <MyContext.Consumer>
-    {(context) => (
+    {({submitAI}) => (
         <StyledWrapper>
         <StyledTitleWrapper>
           <StyledTitle>TicTacToe Game</StyledTitle>
@@ -53,7 +53,7 @@ const WelcomeView = () => (
           <StyledButtonLink as={Link} to='/players' player>
             Player vs. Player
           </StyledButtonLink>
-          <StyledButtonLink as={Link} to="/game">
+          <StyledButtonLink as={Link} to="/game" onClick={submitAI}>
             Player vs. AI
           </StyledButtonLink>
         </StyledButtonWrapper>

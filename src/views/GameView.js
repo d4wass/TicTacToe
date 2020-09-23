@@ -46,21 +46,41 @@ const StyledButtonWrapper = styled.div`
 
 const GameViews = () => (
   <MyContext.Consumer>
-    {({ state, handleMove, setPlayAgain }) => {
+    {({ state, handleMove, setPlayAgain, handleConsole }) => {
 
       return (
         <StyledWrapper>
           <StyledWrapperBoard>
             <PlayerStats player={state.player1} />
-            <Board fields={state.fields} moveFn={handleMove} />
+            <Board
+              fields={state.fields}
+              moveFn={handleMove}
+              player1={state.player1}
+              player2={state.player2}
+              gameType={state.gameType}
+              handleConsole={handleConsole}
+            />
             <PlayerStats player={state.player2} />
           </StyledWrapperBoard>
           {state.gameEnd && (
             <StyledButtonWrapper>
-              <StyledTitle>Player Wins</StyledTitle>
+              {state.gameDraw ? <StyledTitle>Draw</StyledTitle> : <StyledTitle>Player {state.player1.gameWinner ? state.player1.name : state.player2.name} Wins</StyledTitle>}
               <StyledButton onClick={setPlayAgain}>Play Again</StyledButton>
             </StyledButtonWrapper>
           )}
+          {
+            state.player1.turn ? (
+              <StyledButtonWrapper>
+                <StyledTitle>Turn: {state.player1.name}</StyledTitle>
+              </StyledButtonWrapper>
+            ) : state.player2.turn ? (
+              <StyledButtonWrapper>
+                <StyledTitle>Turn: {state.player2.name}</StyledTitle>
+              </StyledButtonWrapper>
+              ) : (
+              null
+            )
+          }
         </StyledWrapper>
       )
     }}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { checkWinner } from '../utils/GameLogic';
+import { bestMove } from '../utils/aiLogic';
 
 export const MyContext = React.createContext();
 
@@ -10,18 +11,60 @@ export class MyProvider extends Component {
       result: 0,
       figure: "x",
       turn: true,
+      gameWinner: false
     },
     player2: {
       name: "o",
       result: 0,
       figure: "o",
       turn: false,
+      gameWinner: false
     },
     figures: ['x', 'o'],
     fields: new Array(9).fill(""),
+    // fields: ["x", "o", "x", "o", "", "", "", "x", "o"],
     isModalOpen: false,
-    gameEnd: false
+    gameEnd: false,
+    gameDraw: false,
+    gameType: {
+      pvp: false,
+      pvc: false
+    }
   };
+
+  handleConsole = (index) => {
+    console.log('działa');
+    const { player1, player2, fields } = this.state;
+    const updateBoard = fields;
+    const updatePlayer1 = player1;
+    const updatePlayer2 = player2;
+    const move = bestMove(updateBoard, updatePlayer1, updatePlayer2)
+
+    if (!player1.turn && !player2.turn) {
+      return
+    }
+    console.log(move)
+    console.log(updateBoard[move])
+    if (updatePlayer1.turn ) {
+      console.log('wpadam')
+      updateBoard[move] = updatePlayer1.figure;
+      updatePlayer1.turn = false;
+      updatePlayer2.turn = true;
+    } else if (updatePlayer2.turn && updateBoard[index] === "") {
+      updateBoard[index] = updatePlayer2.figure;
+      updatePlayer2.turn = false;
+      updatePlayer1.turn = true;
+    }
+
+    const updateFigure = checkWinner(updateBoard);
+
+    this.setState({
+      fields: updateBoard,
+      player1: updatePlayer1,
+      player2: updatePlayer2,
+    });
+    this.setResult(updateFigure);
+  }
 
   handleMove = (index) => {
     const { player1, player2, fields } = this.state;
@@ -44,8 +87,6 @@ export class MyProvider extends Component {
     }
 
     const updateFigure = checkWinner(updateBoard);
-    console.log(updateFigure)
-    // this.setResult(updateFigure);
 
     this.setState({
       fields: updateBoard,
@@ -111,12 +152,12 @@ export class MyProvider extends Component {
     const { player1, player2 } = this.state;
 
     if (player1.figure === figure) {
-      console.log('działa x')
       this.setState((prevState) => ({
         player1: {
           ...prevState.player1,
           result: prevState.player1.result + 1,
-          turn: false
+          turn: false,
+          gameWinner: true
         },
         player2: {
           ...prevState.player2,
@@ -127,18 +168,33 @@ export class MyProvider extends Component {
     }
 
     if (player2.figure === figure) {
-      console.log('działa o')
       this.setState((prevState) => ({
         player2: {
           ...prevState.player2,
           result: prevState.player2.result + 1,
-          turn: false
+          turn: false,
+          gameWinner: true
         },
         player1: {
           ...prevState.player1,
           turn: false
         },
         gameEnd: true
+      }))
+    }
+
+    if (figure === 'draw') {
+      this.setState((prevState) => ({
+        player1: {
+          ...prevState.player1,
+          turn: false
+        },
+        player2: {
+          ...prevState.player2,
+          turn: false
+        },
+        gameEnd: true,
+        gameDraw: true
       }))
     }
 
@@ -149,31 +205,38 @@ export class MyProvider extends Component {
       player1: {
         ...prevState.player1,
         turn: true,
+        gameWinner: false
       },
       player2: {
         ...prevState.player2,
         turn: false,
+        gameWinner: false
       },
       fields: new Array(9).fill(""),
       isModalOpen: false,
-      gameEnd: false
+      gameEnd: false,
+      gameDraw: false,
     }))
   }
 
-  // submitAI = () => {
-  //   this.setState((prevState) => ({
-  //     player1: {
-  //       ...prevState.player1,
-  //       name: "Player",
-  //       figure: "x",
-  //     },
-  //     player2: {
-  //       ...prevState.player2,
-  //       name: "Comp",
-  //       figure: 'o'
-  //     }
-  //   }))
-  // }
+  submitAI = () => {
+    this.setState((prevState) => ({
+      player1: {
+        ...prevState.player1,
+        name: "Comp",
+        figure: "x",
+      },
+      player2: {
+        ...prevState.player2,
+        name: "Player",
+        figure: 'o'
+      },
+      gameType: {
+        ...prevState.gameType,
+        pvc: true,
+      }
+    }))
+  }
 
 
 
@@ -186,7 +249,9 @@ export class MyProvider extends Component {
         handleRadio: this.handleRadioInput,
         handleModal: this.handleModal,
         valideForm: this.valideForm,
-        setPlayAgain: this.setPlayAgain
+        setPlayAgain: this.setPlayAgain,
+        submitAI: this.submitAI,
+        handleConsole: this.handleConsole
       }}>
         {this.props.children}
       </MyContext.Provider>

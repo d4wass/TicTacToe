@@ -13,6 +13,7 @@
 // 0,4,8
 // 6,4,2
 //
+
 export const checkWinner = (fields) => {
   //row - game winner
   if (
@@ -109,5 +110,10 @@ export const checkWinner = (fields) => {
     } else if (fields[2] === "x" && fields[4] === "x" && fields[6] === "x"){
       return "x";
     }
+  }
+
+  const checkedFields = fields.every(i => i === 'x' || i === 'o');
+  if (checkedFields) {
+    return 'draw'
   }
 };

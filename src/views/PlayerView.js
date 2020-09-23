@@ -18,7 +18,6 @@ const StyledWrapper = styled.div`
 
 const StyledFormWrapper = styled.form`
   display: flex;
-
 `;
 
 const StyledTitle = styled.h1`

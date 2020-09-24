@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { checkWinner } from '../utils/GameLogic';
-import { bestMove } from '../utils/aiLogic';
+import { checkWinner } from "../utils/GameLogic";
+import { bestMove } from "../utils/aiLogic";
 
 export const MyContext = React.createContext();
 
@@ -11,44 +11,41 @@ export class MyProvider extends Component {
       result: 0,
       figure: "",
       turn: true,
-      gameWinner: false
+      gameWinner: false,
     },
     player2: {
       name: "",
       result: 0,
       figure: "",
       turn: false,
-      gameWinner: false
+      gameWinner: false,
     },
-    figures: ['x', 'o'],
+    figures: ["x", "o"],
     fields: new Array(9).fill(""),
     isModalOpen: false,
     gameEnd: false,
     gameDraw: false,
     gameType: {
       pvp: false,
-      pvc: false
-    }
+      pvc: false,
+    },
   };
-
-
 
   componentDidUpdate() {
     if (this.state.gameType.pvc && this.state.player1.turn) {
-      this.handleConsole()
+      this.handleConsole();
     }
   }
-
 
   handleConsole = (index) => {
     const { player1, player2, fields } = this.state;
     const updateBoard = fields;
     const updatePlayer1 = player1;
     const updatePlayer2 = player2;
-    const move = bestMove(updateBoard, updatePlayer1, updatePlayer2)
+    const move = bestMove(updateBoard, updatePlayer1, updatePlayer2);
 
     if (!player1.turn && !player2.turn) {
-      return
+      return;
     }
 
     if (updatePlayer1.turn) {
@@ -69,7 +66,7 @@ export class MyProvider extends Component {
       player2: updatePlayer2,
     });
     this.setResult(updateFigure);
-  }
+  };
 
   handleMove = (index) => {
     const { player1, player2, fields } = this.state;
@@ -78,7 +75,7 @@ export class MyProvider extends Component {
     const updatePlayer2 = player2;
 
     if (!player1.turn && !player2.turn) {
-      return
+      return;
     }
 
     if (updatePlayer1.turn && updateBoard[index] === "") {
@@ -102,56 +99,58 @@ export class MyProvider extends Component {
   };
 
   handleInput = (e) => {
-    const { name, value, id } = e.target;
-    if (id === 'player1') {
-      this.setState((prevState) => ({
-        player1: {
-        ...prevState.player1,
-        [name]: value,
+    const { name, value, id, type } = e.target;
+    if (type === "text") {
+      if (id === "player1") {
+        this.setState((prevState) => ({
+          player1: {
+            ...prevState.player1,
+            [name]: value,
+          },
+        }));
+      } else if (id === "player2") {
+        this.setState((prevState) => ({
+          player2: {
+            ...prevState.player2,
+            [name]: value,
+          },
+        }));
       }
-      }))
-    } else if (id === 'player2') {
-        this.setState((prevState) => ({
-        player2: {
-          ...prevState.player2,
-          [name]: value,
-        }
-      }))
     }
-  }
 
-  handleRadioInput = (e) => {
-    const { value, id } = e.target;
-     if (id === 'player1') {
-      this.setState((prevState) => ({
-        player1: {
-        ...prevState.player1,
-        figure: value,
-       }
-      }))
-    } else if (id === 'player2') {
+    if (type === "radio") {
+      if (id === "player1") {
         this.setState((prevState) => ({
-        player2: {
-          ...prevState.player2,
-          figure: value,
-        }
-      }))
+          player1: {
+            ...prevState.player1,
+            figure: value,
+          },
+        }));
+      } else if (id === "player2") {
+        this.setState((prevState) => ({
+          player2: {
+            ...prevState.player2,
+            figure: value,
+          },
+        }));
+      }
     }
-  }
+  };
+
   handleModal = () => {
-    this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}))
-  }
+    this.setState((prevState) => ({ isModalOpen: !prevState.isModalOpen }));
+  };
 
   valideForm = () => {
     const { player1, player2 } = this.state;
     if (!player1.name && !player2.name && !player1.figure && !player2.figure) {
-      this.setState({isModalOpen: true})
+      this.setState({ isModalOpen: true });
     } else if (player1.figure === player2.figure) {
       this.setState({
         isModalOpen: true,
-      })
+      });
     }
-  }
+  };
 
   setResult = (figure) => {
     const { player1, player2 } = this.state;
@@ -162,14 +161,14 @@ export class MyProvider extends Component {
           ...prevState.player1,
           result: prevState.player1.result + 1,
           turn: false,
-          gameWinner: true
+          gameWinner: true,
         },
         player2: {
           ...prevState.player2,
-          turn: false
+          turn: false,
         },
-        gameEnd: true
-      }))
+        gameEnd: true,
+      }));
     }
 
     if (player2.figure === figure) {
@@ -178,32 +177,31 @@ export class MyProvider extends Component {
           ...prevState.player2,
           result: prevState.player2.result + 1,
           turn: false,
-          gameWinner: true
+          gameWinner: true,
         },
         player1: {
           ...prevState.player1,
-          turn: false
+          turn: false,
         },
-        gameEnd: true
-      }))
+        gameEnd: true,
+      }));
     }
 
-    if (figure === 'draw') {
+    if (figure === "draw") {
       this.setState((prevState) => ({
         player1: {
           ...prevState.player1,
-          turn: false
+          turn: false,
         },
         player2: {
           ...prevState.player2,
-          turn: false
+          turn: false,
         },
         gameEnd: true,
-        gameDraw: true
-      }))
+        gameDraw: true,
+      }));
     }
-
-  }
+  };
 
   setPlayAgain = () => {
     if (this.state.gameType.pvc) {
@@ -211,39 +209,37 @@ export class MyProvider extends Component {
         player1: {
           ...prevState.player1,
           turn: false,
-          gameWinner: false
+          gameWinner: false,
         },
         player2: {
           ...prevState.player2,
           turn: true,
-          gameWinner: false
+          gameWinner: false,
         },
         fields: new Array(9).fill(""),
         isModalOpen: false,
         gameEnd: false,
         gameDraw: false,
-      }))
+      }));
     } else {
       this.setState((prevState) => ({
         player1: {
           ...prevState.player1,
           turn: true,
-          gameWinner: false
+          gameWinner: false,
         },
         player2: {
           ...prevState.player2,
           turn: false,
-          gameWinner: false
+          gameWinner: false,
         },
         fields: new Array(9).fill(""),
         isModalOpen: false,
         gameEnd: false,
         gameDraw: false,
-      }))
+      }));
     }
-
-
-  }
+  };
 
   submitAI = () => {
     this.setState((prevState) => ({
@@ -255,30 +251,29 @@ export class MyProvider extends Component {
       player2: {
         ...prevState.player2,
         name: "Player",
-        figure: 'o'
+        figure: "o",
       },
       gameType: {
         ...prevState.gameType,
         pvc: true,
-      }
-    }))
-  }
-
-
+      },
+    }));
+  };
 
   render() {
     return (
-      <MyContext.Provider value={{
-        state: this.state,
-        handleMove: this.handleMove,
-        handleInput: this.handleInput,
-        handleRadio: this.handleRadioInput,
-        handleModal: this.handleModal,
-        valideForm: this.valideForm,
-        setPlayAgain: this.setPlayAgain,
-        submitAI: this.submitAI,
-        handleConsole: this.handleConsole
-      }}>
+      <MyContext.Provider
+        value={{
+          state: this.state,
+          handleMove: this.handleMove,
+          handleInput: this.handleInput,
+          handleModal: this.handleModal,
+          valideForm: this.valideForm,
+          setPlayAgain: this.setPlayAgain,
+          submitAI: this.submitAI,
+          handleConsole: this.handleConsole,
+        }}
+      >
         {this.props.children}
       </MyContext.Provider>
     );

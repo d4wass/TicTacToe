@@ -23,7 +23,7 @@ const StyledRadioWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-const PlayerSettings = ({ player, figures, fnInput, fnRadio, id }) => (
+const PlayerSettings = ({ player, figures, fnInput, id }) => (
   <StyledWrapper>
     <StyledForm>
       <Input
@@ -39,7 +39,7 @@ const PlayerSettings = ({ player, figures, fnInput, fnRadio, id }) => (
             key={figure}
             figure={figure}
             player={player}
-            fnRadio={fnRadio}
+            handleInput={fnInput}
             id={id}
           />
         ))}

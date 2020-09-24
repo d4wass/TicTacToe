@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Input from "./Input";
-import RadioButton from './RadioButton'
+import Input from "../atoms/Input";
+import RadioButton from "../atoms/RadioButton";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -26,9 +26,23 @@ const StyledRadioWrapper = styled.div`
 const PlayerSettings = ({ player, figures, fnInput, fnRadio, id }) => (
   <StyledWrapper>
     <StyledForm>
-      <Input id={id} label="player name" name='name' value={player.name} handleInput={fnInput} />
+      <Input
+        id={id}
+        label='player name'
+        name='name'
+        value={player.name}
+        handleInput={fnInput}
+      />
       <StyledRadioWrapper>
-        {figures.map((figure) => (<RadioButton key={figure} figure={figure} player={player} fnRadio={fnRadio} id={id}/>))}
+        {figures.map((figure) => (
+          <RadioButton
+            key={figure}
+            figure={figure}
+            player={player}
+            fnRadio={fnRadio}
+            id={id}
+          />
+        ))}
       </StyledRadioWrapper>
     </StyledForm>
   </StyledWrapper>

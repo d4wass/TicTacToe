@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
-import AlertModal from "../components/AlertModal";
-import Button from "../components/Button";
-import PlayerSettings from "../components/PlayerSettings";
+import AlertModal from "../components/molecules/AlertModal";
+import Button from "../components/atoms/Button";
+import PlayerSettings from "../components/molecules/PlayerSettings";
 import { MyContext } from "../context/index";
-import Title from "../components/atoms/Title"
+import Title from "../components/atoms/Title";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -14,13 +14,12 @@ const StyledWrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #2AB7CA;
+  background-color: #2ab7ca;
 `;
 
 const StyledFormWrapper = styled.form`
   display: flex;
 `;
-
 
 const StyledButton = styled(Button)`
   max-width: 250px;
@@ -33,29 +32,46 @@ const StyledButton = styled(Button)`
 const PlayerView = () => (
   <MyContext.Consumer>
     {(context) => {
-
       const { state } = context;
 
       const handleSubmit = () => {
         const { player1, player2 } = state;
         if (player1.name && player2.name && player1.figure && player2.figure) {
           if (player1.figure !== player2.figure) {
-            return '/game';
+            return "/game";
           }
         }
-      }
+      };
 
       return (
         <StyledWrapper>
           {context.state.isModalOpen && <AlertModal />}
           <Title>Players Settings</Title>
           <StyledFormWrapper>
-            <PlayerSettings id="player1" player={state.player1} fnInput={context.handleInput} fnRadio={context.handleRadio} figures={context.state.figures} />
-            <PlayerSettings id="player2" player={state.player2} fnInput={context.handleInput} fnRadio={context.handleRadio} figures={context.state.figures} />
+            <PlayerSettings
+              id='player1'
+              player={state.player1}
+              fnInput={context.handleInput}
+              fnRadio={context.handleRadio}
+              figures={context.state.figures}
+            />
+            <PlayerSettings
+              id='player2'
+              player={state.player2}
+              fnInput={context.handleInput}
+              fnRadio={context.handleRadio}
+              figures={context.state.figures}
+            />
           </StyledFormWrapper>
-          <StyledButton as={Link} to={() => handleSubmit()} onClick={context.valideForm}>Save it</StyledButton>
+          <StyledButton
+            as={Link}
+            to={() => handleSubmit()}
+            onClick={context.valideForm}
+          >
+            Save it
+          </StyledButton>
         </StyledWrapper>
-      )
+      );
     }}
   </MyContext.Consumer>
 );

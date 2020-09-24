@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 import React from "react";
-import Tic from "../assets/times-solid.svg";
-import Toe from "../assets/circle-regular.svg";
+import Tic from "../../assets/times-solid.svg";
+import Toe from "../../assets/circle-regular.svg";
 
 const scaleIn = keyframes`
  0% {
@@ -11,14 +11,11 @@ const scaleIn = keyframes`
   100% {
     transform: scale(1);
     opacity: 1;
-  }`
-;
-
-
+  }`;
 const StyledSymbol = styled.div`
   height: 100%;
   width: 100%;
-  animation: ${scaleIn} 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: ${scaleIn} 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   ${({ symbol }) =>
     symbol === "x" &&
     css`

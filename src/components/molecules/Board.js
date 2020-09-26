@@ -30,23 +30,14 @@ const StyledField = styled.div`
   }
 `;
 
-const Board = ({
-  fields,
-  moveFn,
-  player1,
-  player2,
-  gameType,
-  handleConsole,
-}) => (
+const Board = ({ fields, moveFn, player1, player2 }) => (
   <StyledWrapper>
     <PlayerStats player={player1} />
     <BoardWrapper>
       {fields.map((field, index) => (
         <StyledField
           key={index}
-          onClick={
-            !gameType.pvc ? () => moveFn(index) : () => handleConsole(index)
-          }
+          onClick={() => moveFn(index)}
           player1={player1.turn}
           player2={player2.turn}
         >

@@ -34,17 +34,15 @@ const StyledButton = styled(Button)`
   font-weight: 700;
 `;
 
-const AlertModal = ({ message }) => {
+const AlertModal = () => {
   return (
     <MyContext.Consumer>
-      {(context) => (
+      {({ handleModal, state }) => (
         <StyledWrapper>
           <StyledAlertWrapper>
             <Title errorMsg>Error!</Title>
-            <Paragraph>Błąd brakuje danych o graczach</Paragraph>
-            <StyledButton onClick={() => context.handleModal()}>
-              Close
-            </StyledButton>
+            <Paragraph>{state.message}</Paragraph>
+            <StyledButton onClick={() => handleModal()}>Close</StyledButton>
           </StyledAlertWrapper>
         </StyledWrapper>
       )}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { checkWinner } from "../utils/GameLogic";
+import { switchWinner } from "../utils/GameLogic";
 import { bestMove } from "../utils/aiLogic";
 
 export const MyContext = React.createContext();
@@ -25,48 +25,15 @@ export class MyProvider extends Component {
     isModalOpen: false,
     gameEnd: false,
     gameDraw: false,
-    gameType: {
-      pvp: false,
-      pvc: false,
-    },
+    gameAI: false,
+    message: "",
   };
 
   componentDidUpdate() {
-    if (this.state.gameType.pvc && this.state.player1.turn) {
-      this.handleConsole();
+    if (this.state.gameAI && this.state.player1.turn) {
+      this.handleMove();
     }
   }
-
-  handleConsole = (index) => {
-    const { player1, player2, fields } = this.state;
-    const updateBoard = fields;
-    const updatePlayer1 = player1;
-    const updatePlayer2 = player2;
-    const move = bestMove(updateBoard, updatePlayer1, updatePlayer2);
-
-    if (!player1.turn && !player2.turn) {
-      return;
-    }
-
-    if (updatePlayer1.turn) {
-      updateBoard[move] = updatePlayer1.figure;
-      updatePlayer1.turn = false;
-      updatePlayer2.turn = true;
-    } else if (updatePlayer2.turn && updateBoard[index] === "") {
-      updateBoard[index] = updatePlayer2.figure;
-      updatePlayer2.turn = false;
-      updatePlayer1.turn = true;
-    }
-
-    const updateFigure = checkWinner(updateBoard);
-
-    this.setState({
-      fields: updateBoard,
-      player1: updatePlayer1,
-      player2: updatePlayer2,
-    });
-    this.setResult(updateFigure);
-  };
 
   handleMove = (index) => {
     const { player1, player2, fields } = this.state;
@@ -78,17 +45,34 @@ export class MyProvider extends Component {
       return;
     }
 
-    if (updatePlayer1.turn && updateBoard[index] === "") {
-      updateBoard[index] = updatePlayer1.figure;
-      updatePlayer1.turn = false;
-      updatePlayer2.turn = true;
-    } else if (updatePlayer2.turn && updateBoard[index] === "") {
-      updateBoard[index] = updatePlayer2.figure;
-      updatePlayer2.turn = false;
-      updatePlayer1.turn = true;
+    if (this.state.gameAI) {
+      const move = bestMove(updateBoard, updatePlayer1, updatePlayer2);
+
+      if (updatePlayer1.turn) {
+        updateBoard[move] = updatePlayer1.figure;
+        updatePlayer1.turn = false;
+        updatePlayer2.turn = true;
+      } else if (updatePlayer2.turn && updateBoard[index] === "") {
+        updateBoard[index] = updatePlayer2.figure;
+        updatePlayer2.turn = false;
+        updatePlayer1.turn = true;
+      }
     }
 
-    const updateFigure = checkWinner(updateBoard);
+    if (!this.state.gameAI) {
+      if (updatePlayer1.turn && updateBoard[index] === "") {
+        updateBoard[index] = updatePlayer1.figure;
+        updatePlayer1.turn = false;
+        updatePlayer2.turn = true;
+      } else if (updatePlayer2.turn && updateBoard[index] === "") {
+        updateBoard[index] = updatePlayer2.figure;
+        updatePlayer2.turn = false;
+        updatePlayer1.turn = true;
+      }
+    }
+
+    const updateFigure = switchWinner(updateBoard);
+    console.log(updateFigure);
 
     this.setState({
       fields: updateBoard,
@@ -137,19 +121,11 @@ export class MyProvider extends Component {
     }
   };
 
-  handleModal = () => {
-    this.setState((prevState) => ({ isModalOpen: !prevState.isModalOpen }));
-  };
-
-  valideForm = () => {
-    const { player1, player2 } = this.state;
-    if (!player1.name && !player2.name && !player1.figure && !player2.figure) {
-      this.setState({ isModalOpen: true });
-    } else if (player1.figure === player2.figure) {
-      this.setState({
-        isModalOpen: true,
-      });
-    }
+  handleModal = (message) => {
+    this.setState((prevState) => ({
+      isModalOpen: !prevState.isModalOpen,
+      message,
+    }));
   };
 
   setResult = (figure) => {
@@ -204,41 +180,33 @@ export class MyProvider extends Component {
   };
 
   setPlayAgain = () => {
-    if (this.state.gameType.pvc) {
-      this.setState((prevState) => ({
-        player1: {
-          ...prevState.player1,
-          turn: false,
-          gameWinner: false,
-        },
-        player2: {
-          ...prevState.player2,
-          turn: true,
-          gameWinner: false,
-        },
-        fields: new Array(9).fill(""),
-        isModalOpen: false,
-        gameEnd: false,
-        gameDraw: false,
-      }));
-    } else {
-      this.setState((prevState) => ({
-        player1: {
-          ...prevState.player1,
-          turn: true,
-          gameWinner: false,
-        },
-        player2: {
-          ...prevState.player2,
-          turn: false,
-          gameWinner: false,
-        },
-        fields: new Array(9).fill(""),
-        isModalOpen: false,
-        gameEnd: false,
-        gameDraw: false,
-      }));
-    }
+    this.setState((prevState) => ({
+      player1: {
+        ...prevState.player1,
+        turn: prevState.player1.gameWinner
+          ? false
+          : prevState.gameDraw
+          ? true
+          : !prevState.player1.gameWinner
+          ? true
+          : false,
+        gameWinner: false,
+      },
+      player2: {
+        ...prevState.player2,
+        turn: prevState.player2.gameWinner
+          ? false
+          : prevState.gameDraw
+          ? false
+          : !prevState.player2.gameWinner
+          ? true
+          : false,
+        gameWinner: false,
+      },
+      fields: new Array(9).fill(""),
+      gameEnd: false,
+      gameDraw: false,
+    }));
   };
 
   submitAI = () => {
@@ -253,10 +221,7 @@ export class MyProvider extends Component {
         name: "Player",
         figure: "o",
       },
-      gameType: {
-        ...prevState.gameType,
-        pvc: true,
-      },
+      gameAI: true,
     }));
   };
 
@@ -268,10 +233,8 @@ export class MyProvider extends Component {
           handleMove: this.handleMove,
           handleInput: this.handleInput,
           handleModal: this.handleModal,
-          valideForm: this.valideForm,
           setPlayAgain: this.setPlayAgain,
           submitAI: this.submitAI,
-          handleConsole: this.handleConsole,
         }}
       >
         {this.props.children}

@@ -32,7 +32,34 @@ const StyledButton = styled(Button)`
 const PlayerView = () => (
   <MyContext.Consumer>
     {(context) => {
-      const { state } = context;
+      const { state, handleModal } = context;
+
+      const handleFormValidation = () => {
+        const { player1, player2 } = state;
+        if (
+          !player1.name &&
+          !player2.name &&
+          !player1.figure &&
+          !player2.figure
+        ) {
+          const message = "please fill the players details";
+          handleModal(message);
+        } else if (
+          player1.figure === player2.figure &&
+          player1.figure !== "" &&
+          player2.figure !== ""
+        ) {
+          const message = "please choose different symbols for each player";
+          handleModal(message);
+        } else if (
+          player1.figure === player2.figure &&
+          player1.figure === "" &&
+          player2.figure === ""
+        ) {
+          const message = "please choose symbols for players";
+          handleModal(message);
+        }
+      };
 
       const handleSubmit = () => {
         const { player1, player2 } = state;
@@ -66,7 +93,7 @@ const PlayerView = () => (
           <StyledButton
             as={Link}
             to={() => handleSubmit()}
-            onClick={context.valideForm}
+            onClick={handleFormValidation}
           >
             Save it
           </StyledButton>

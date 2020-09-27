@@ -15,7 +15,7 @@ const StyledWrapper = styled.div`
 
 const GameViews = () => (
   <MyContext.Consumer>
-    {({ state, handleMove, setPlayAgain, handleConsole }) => {
+    {({ state, handleMove, setPlayAgain }) => {
       return (
         <StyledWrapper>
           <Board
@@ -24,7 +24,6 @@ const GameViews = () => (
             player1={state.player1}
             player2={state.player2}
             gameType={state.gameType}
-            handleConsole={handleConsole}
           />
           {state.gameEnd && (
             <GameTitle

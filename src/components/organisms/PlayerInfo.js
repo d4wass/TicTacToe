@@ -4,31 +4,28 @@ import breakpoint from "../../theme/breakpoints";
 import PlayerStats from "../molecules/PlayerStats";
 
 const StyledStatWrapper = styled.div`
+  justify-content: space-between;
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  padding: 0 30px;
   display: flex;
-  justify-content: space-evenly;
-  width: 70%;
-  padding: 0 200px;
 
   @media ${breakpoint.device.xs} {
-    justify-content: space-evenly;
-    position: absolute;
-    bottom: 10%;
-    width: 100%;
-    padding: 0 20px;
-  }
-
-  @media ${breakpoint.device.lg} {
     justify-content: space-between;
-    position: absolute;
     width: 100%;
+    bottom: 40%;
     padding: 0 30px;
   }
 
-  @media ${breakpoint.device.xl} {
+  @media ${breakpoint.device.sm} {
     justify-content: space-between;
-    /* position: absolute; */
-    width: 100%;
-    padding: 0 60px;
+    padding: 0 50px;
+  }
+
+  @media ${breakpoint.device.xl} {
+    justify-content: space-around;
+    /* padding: 0 50px; */
   }
 `;
 

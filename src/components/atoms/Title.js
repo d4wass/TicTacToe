@@ -3,10 +3,10 @@ import breakpoint from "../../theme/breakpoints";
 
 const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.title};
-  margin-bottom: 20px;
   font-weight: 900;
   color: #f4f4f8;
   text-align: center;
+  max-width: 80%;
 
   ${({ errorMsg }) =>
     errorMsg &&
@@ -19,32 +19,46 @@ const Title = styled.h1`
     turnTitle &&
     css`
       font-weight: 700;
-      font-size: 30px;
+      font-size: 2em;
     `};
 
   ${({ result }) =>
     result &&
     css`
-      font-size: 55px;
+      font-size: 1.8em;
       margin-bottom: 15px;
+      max-width: 90%;
     `};
 
   ${({ player }) =>
     player &&
     css`
-      font-size: 50px;
+      font-size: 1.8em;
+      margin-bottom: 0;
     `};
 
   @media ${breakpoint.device.xs} {
-    font-size: ${({ welcome, setting, player, result }) =>
-      welcome || setting ? "3.5em" : player || result ? "1.8em" : null};
-    max-width: ${({ result }) => (result ? "90%" : "80%")};
-    margin-bottom: ${({ player }) => player && "0px"};
+    font-size: ${({ welcome, setting, player, result, turnTitle }) =>
+      welcome || setting
+        ? "4em"
+        : player
+        ? "2.5em"
+        : turnTitle || result
+        ? "4em"
+        : null};
+    max-width: 80%;
   }
 
-  @media ${breakpoint.device.lg} {
-    font-size: ${({ player }) => (player ? "2.5em" : null)};
-    margin-bottom: ${({ player }) => player && "5px"};
+  @media ${breakpoint.device.sm} {
+    font-size: ${({ welcome, setting, player, result, turnTitle }) =>
+      welcome || setting
+        ? "4em"
+        : player
+        ? "2.5em"
+        : turnTitle || result
+        ? "4em"
+        : null};
+    max-width: 80%;
   }
 `;
 

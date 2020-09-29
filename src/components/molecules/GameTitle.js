@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
   align-self: center;
   position: absolute;
   width: 100%;
-  top: 15%;
+  top: 5%;
 
   @media ${breakpoint.device.sm} {
     top: 10%;

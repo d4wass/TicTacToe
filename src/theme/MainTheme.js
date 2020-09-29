@@ -10,8 +10,8 @@ export const theme = {
   bold: 700,
   black: 900,
   fontSize: {
-    title: "4em",
-    paragraph: "25px",
+    title: "3.5em",
+    paragraph: "0.8em",
     label: "13px",
     input: "1.3em",
   },

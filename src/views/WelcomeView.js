@@ -17,13 +17,13 @@ const StyledWrapper = styled.div`
 
 const StyledButtonWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 70%;
 
   @media ${breakpoint.device.xs} {
-    flex-direction: column;
-    width: 70%;
+    flex-direction: row;
+    width: 50%;
   }
 `;
 

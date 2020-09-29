@@ -8,10 +8,13 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 300px;
 
   @media ${breakpoint.device.sm} {
-    width: 300px;
+    margin: 30px 0;
+    width: 400px;
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 

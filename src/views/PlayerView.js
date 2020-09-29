@@ -20,9 +20,10 @@ const StyledWrapper = styled.div`
 
 const StyledFormWrapper = styled.form`
   display: flex;
+  flex-direction: column;
 
   @media ${breakpoint.device.xs} {
-    flex-direction: column;
+    flex-direction: row;
   }
 `;
 

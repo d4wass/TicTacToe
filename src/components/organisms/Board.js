@@ -15,14 +15,14 @@ const StyledWrapper = styled.div`
 const BoardWrapper = styled.div`
   display: grid;
   position: absolute;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 80px 80px 80px;
+  grid-template-rows: 80px 80px 80px;
   grid-gap: 5px;
   z-index: 1;
 
   @media only screen and ${breakpoint.device.xs} {
-    grid-template-columns: 80px 80px 80px;
-    grid-template-rows: 80px 80px 80px;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
   }
 `;
 const StyledField = styled.div`

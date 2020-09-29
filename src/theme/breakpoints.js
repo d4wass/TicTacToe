@@ -1,13 +1,11 @@
 const size = {
   xs: "43em",
   sm: "62em",
-  lg: "768px",
-  xl: "1024px",
+  xl: "82em",
 };
 const device = {
-  xs: `(max-width: ${size.xs})`,
+  xs: `(min-width: ${size.xs})`,
   sm: `(min-width: ${size.sm})`,
-  lg: `(min-width: ${size.lg})`,
-  xl: `(max-width: ${size.xl})`,
+  xl: `(min-width: ${size.xl})`,
 };
 export default { size, device };

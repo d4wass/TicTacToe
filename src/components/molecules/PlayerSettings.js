@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import Input from "../atoms/Input";
 import RadioButton from "../atoms/RadioButton";
+import breakpoint from "../../theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 400px;
+
+  @media ${breakpoint.device.sm} {
+    width: 300px;
+  }
 `;
 
 const StyledForm = styled.div`

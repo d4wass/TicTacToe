@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { MyContext } from "../context/index";
-import Board from "../components/molecules/Board";
-import GameTitle from "../components/molecules/ResultTitle";
+import Board from "../components/organisms/Board";
+import GameTitle from "../components/molecules/GameTitle";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -35,9 +35,9 @@ const GameViews = () => (
             />
           )}
           {state.player1.turn ? (
-            <GameTitle name={state.player1.name} paramAttribute='primary' />
+            <GameTitle name={state.player1.name} color='primary' />
           ) : state.player2.turn ? (
-            <GameTitle name={state.player2.name} paramAttribute='secondary' />
+            <GameTitle name={state.player2.name} color='secondary' />
           ) : null}
         </StyledWrapper>
       );

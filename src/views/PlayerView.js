@@ -6,19 +6,24 @@ import Button from "../components/atoms/Button";
 import PlayerSettings from "../components/molecules/PlayerSettings";
 import { MyContext } from "../context/index";
 import Title from "../components/atoms/Title";
+import breakpoint from "../theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: #2ab7ca;
 `;
 
 const StyledFormWrapper = styled.form`
   display: flex;
+
+  @media ${breakpoint.device.xs} {
+    flex-direction: column;
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -73,7 +78,7 @@ const PlayerView = () => (
       return (
         <StyledWrapper>
           {context.state.isModalOpen && <AlertModal />}
-          <Title>Players Settings</Title>
+          <Title setting>Players Settings</Title>
           <StyledFormWrapper>
             <PlayerSettings
               id='player1'

@@ -1,21 +1,29 @@
 import styled from "styled-components";
 import React from "react";
 import Symbol from "../atoms/Symbol";
-import PlayerStats from "./PlayerStats";
+import breakpoint from "../../theme/breakpoints";
+import PlayerInfo from "./PlayerInfo";
 
 const StyledWrapper = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-evenly;
   align-items: center;
+  flex-direction: column;
 `;
 
 const BoardWrapper = styled.div`
   display: grid;
-  max-width: 50%;
+  position: absolute;
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 100px 100px 100px;
   grid-gap: 5px;
+  z-index: 1;
+
+  @media only screen and ${breakpoint.device.xs} {
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+  }
 `;
 const StyledField = styled.div`
   height: 100%;
@@ -28,7 +36,7 @@ const StyledField = styled.div`
     background-color: ${({ player1, player2 }) =>
       player1.turn && player1.figure === "x"
         ? "hsla(0.3,98.9%,64.1%,0.5)"
-        : player1.turn && player1.figure === "o"
+        : player2.turn && player2.figure === "o"
         ? "hsla(44.6,98.7%,69.8%,0.5)"
         : "hsla(0.3,98.9%,64.1%,0.5)"};
   }
@@ -36,7 +44,6 @@ const StyledField = styled.div`
 
 const Board = ({ fields, moveFn, player1, player2 }) => (
   <StyledWrapper>
-    <PlayerStats player={player1} />
     <BoardWrapper>
       {fields.map((field, index) => (
         <StyledField
@@ -49,7 +56,7 @@ const Board = ({ fields, moveFn, player1, player2 }) => (
         </StyledField>
       ))}
     </BoardWrapper>
-    <PlayerStats player={player2} />
+    <PlayerInfo player1={player1} player2={player2} />
   </StyledWrapper>
 );
 

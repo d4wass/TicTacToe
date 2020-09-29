@@ -6,19 +6,20 @@ const StyledRadio = styled.label`
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  color: #fff;
+  color: ${({ theme }) => theme.whiteColor};
 `;
 
 const StyledRadioBtn = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  border: solid 2px #fff;
+  border: solid 2px;
+  border-color: ${({ theme }) => theme.whiteColor};
   margin-right: 10px;
   transition: border-color 0.3s ease-in-out;
   cursor: pointer;
   &:hover {
-    background-color: #fe4a49;
+    background-color: ${({ theme }) => theme.whiteColor};
     transition: all 0.3s ease-in-out;
   }
 `;
@@ -29,8 +30,9 @@ const StyledInput = styled.input`
   z-index: -1;
 
   &:checked + ${StyledRadioBtn} {
-    background-color: #fe4a49;
-    box-shadow: inset 0 0 0 2px #fff;
+    background-color: ${({ theme, value }) =>
+      value === "x" ? theme.redColor : theme.yellowColor};
+    box-shadow: inset 0 0 0 2px hsl(240, 22%, 96%);
     border: none;
   }
 `;

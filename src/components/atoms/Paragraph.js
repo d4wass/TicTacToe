@@ -1,25 +1,18 @@
 import styled, { css } from "styled-components";
+import breakpoint from "../../theme/breakpoints";
 
 const Paragraph = styled.p`
   color: #f4f4f8;
   margin-bottom: 20px;
 
-  ${({ primary, secondary }) =>
-    primary &&
+  ${({ color }) =>
+    color &&
     css`
       margin-bottom: 0;
-      font-weight: 700;
-      font-size: 25px;
-      color: #fe4a49;
-    `};
-
-  ${({ secondary }) =>
-    secondary &&
-    css`
-      margin-bottom: 0;
-      font-weight: 700;
-      font-size: 25px;
-      color: #fed766;
+      font-weight: ${({ theme }) => theme.bold};
+      font-size: ${({ theme }) => theme.fontSize.paragraph};
+      color: ${({ theme, color }) =>
+        color === "primary" ? theme.redColor : theme.yellowColor};
     `};
 
   ${({ stats }) =>

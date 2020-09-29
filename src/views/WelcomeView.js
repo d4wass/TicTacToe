@@ -3,6 +3,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
 import { MyContext } from "../context";
 import Title from "../components/atoms/Title";
+import breakpoint from "../theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -19,6 +20,11 @@ const StyledButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   width: 50%;
+
+  @media ${breakpoint.device.xs} {
+    flex-direction: column;
+    width: 70%;
+  }
 `;
 
 const StyledButtonLink = styled.a`
@@ -29,13 +35,14 @@ const StyledButtonLink = styled.a`
   color: ${({ player }) => (player ? "#F4F4F8" : "#2AB7CA")};
   font-weight: 700;
   margin: 10px;
+  text-align: center;
 `;
 
 const WelcomeView = () => (
   <MyContext.Consumer>
     {({ submitAI }) => (
       <StyledWrapper>
-        <Title>TicTacToe Game</Title>
+        <Title welcome>TicTacToe Game</Title>
         <StyledButtonWrapper>
           <StyledButtonLink as={Link} to='/players' player>
             Player vs. Player

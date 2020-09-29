@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../atoms/Button";
 import Title from "../atoms/Title";
 import Paragraph from "../atoms/Paragraph";
+import breakpoint from "../../theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -11,7 +12,12 @@ const StyledWrapper = styled.div`
   align-items: center;
   align-self: center;
   position: absolute;
+  width: 100%;
   top: 15%;
+
+  @media ${breakpoint.device.sm} {
+    top: 10%;
+  }
 `;
 
 const GameTitle = ({
@@ -21,6 +27,7 @@ const GameTitle = ({
   player2,
   setPlayAgain,
   name,
+  color,
 }) =>
   gameTitle ? (
     <StyledWrapper>
@@ -37,7 +44,7 @@ const GameTitle = ({
   ) : (
     <StyledWrapper>
       <Title turnTitle>
-        Turn: <Paragraph paramAttribute>{name}</Paragraph>
+        Turn: <Paragraph color={color}>{name}</Paragraph>
       </Title>
     </StyledWrapper>
   );

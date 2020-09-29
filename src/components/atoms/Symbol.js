@@ -12,15 +12,17 @@ const scaleIn = keyframes`
     transform: scale(1);
     opacity: 1;
   }`;
+
 const StyledSymbol = styled.div`
   height: 100%;
   width: 100%;
   animation: ${scaleIn} 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
   ${({ symbol }) =>
     symbol === "x" &&
     css`
       background-image: url(${Tic});
-      color: #fed766;
+      color: ${({ theme }) => theme.redColor};
       fill: currentColor;
       background-repeat: no-repeat;
       background-position: center;
@@ -30,7 +32,8 @@ const StyledSymbol = styled.div`
     symbol === "o" &&
     css`
       background-image: url(${Toe});
-      color: #fe4a49;
+      background-size: contain;
+      color: ${({ theme }) => theme.yellowColor};
       fill: currentColor;
       background-repeat: no-repeat;
       background-position: center;

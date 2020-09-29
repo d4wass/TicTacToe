@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import { switchWinner } from "../utils/GameLogic";
 import { bestMove } from "../utils/aiLogic";
+import GlobalStyle from "../theme/GlobalStyle";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../theme/MainTheme";
 
 export const MyContext = React.createContext();
 
 export class MyProvider extends Component {
   state = {
     player1: {
-      name: "",
+      name: "damian",
       result: 0,
-      figure: "",
+      figure: "x",
       turn: true,
       gameWinner: false,
     },
     player2: {
-      name: "",
+      name: "berenika",
       result: 0,
-      figure: "",
+      figure: "o",
       turn: false,
       gameWinner: false,
     },
@@ -72,7 +75,6 @@ export class MyProvider extends Component {
     }
 
     const updateFigure = switchWinner(updateBoard);
-    console.log(updateFigure);
 
     this.setState({
       fields: updateBoard,
@@ -237,7 +239,8 @@ export class MyProvider extends Component {
           submitAI: this.submitAI,
         }}
       >
-        {this.props.children}
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>{this.props.children}</ThemeProvider>
       </MyContext.Provider>
     );
   }

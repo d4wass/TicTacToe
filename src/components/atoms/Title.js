@@ -49,12 +49,12 @@ const Title = styled.h1`
     max-width: 80%;
   }
 
-  @media ${breakpoint.device.sm} {
+  @media ${breakpoint.device.xl} {
     font-size: ${({ welcome, setting, player, result, turnTitle }) =>
       welcome || setting
-        ? "4em"
+        ? "5em"
         : player
-        ? "2.5em"
+        ? "3em"
         : turnTitle || result
         ? "4em"
         : null};

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Paragraph from "../atoms/Paragraph";
 import Title from "../atoms/Title";
-import breakpoint from "../../theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;

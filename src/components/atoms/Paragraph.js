@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import breakpoint from "../../theme/breakpoints";
 
 const Paragraph = styled.p`
   color: #f4f4f8;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Symbol from "components/atoms/Symbol";
 import breakpoint from "theme/breakpoints";
 import PlayerInfo from "components/organisms/PlayerInfo";

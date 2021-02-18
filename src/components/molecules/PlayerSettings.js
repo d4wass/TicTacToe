@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Input from "../atoms/Input";
-import RadioButton from "../atoms/RadioButton";
-import breakpoint from "../../theme/breakpoints";
+import Input from "components/atoms/Input";
+import RadioButton from "components/atoms/RadioButton";
+import breakpoint from "theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;

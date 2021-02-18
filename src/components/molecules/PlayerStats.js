@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Paragraph from "../atoms/Paragraph";
-import Title from "../atoms/Title";
+import Paragraph from "components/atoms/Paragraph";
+import Title from "components/atoms/Title";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -16,21 +16,25 @@ const StyledTitleWrapper = styled(StyledWrapper)`
 const StyledBar = styled.span`
   position: absolute;
   top: 100%;
-  left: -10%;
+  /* left: -10%; */
   height: 10px;
   border-radius: 25px;
   width: 30%;
   background-color: ${({ figure }) => (figure === "o" ? "#fed766" : "#fe4a49")};
 `;
 
-const PlayerStats = (props) => (
+const StyledTitle = styled(Title)`
+  font-size: 2.5rem;
+`;
+
+const PlayerStats = ({player}) => (
   <StyledWrapper>
     <StyledTitleWrapper>
-      <Title player>{props.player.name}</Title>
-      <StyledBar figure={props.player.figure} />
+      <StyledTitle as="h2">{player.name}</StyledTitle>
+      <StyledBar figure={player.figure} />
     </StyledTitleWrapper>
-    <Paragraph stats>score: {props.player.result}</Paragraph>
-    <Paragraph stats>figure: {props.player.figure}</Paragraph>
+    <Paragraph stats>score: {player.result}</Paragraph>
+    <Paragraph stats>figure: {player.figure}</Paragraph>
   </StyledWrapper>
 );
 

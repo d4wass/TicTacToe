@@ -10,16 +10,16 @@ export const MyContext = React.createContext();
 export class MyProvider extends Component {
   state = {
     player1: {
-      name: "damian",
+      name: "",
       result: 0,
-      figure: "x",
+      figure: "",
       turn: true,
       gameWinner: false,
     },
     player2: {
-      name: "berenika",
+      name: "",
       result: 0,
-      figure: "o",
+      figure: "",
       turn: false,
       gameWinner: false,
     },
@@ -239,8 +239,10 @@ export class MyProvider extends Component {
           submitAI: this.submitAI,
         }}
       >
+        <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <ThemeProvider theme={theme}>{this.props.children}</ThemeProvider>
+          {this.props.children}
+        </ThemeProvider>
       </MyContext.Provider>
     );
   }

@@ -17,6 +17,7 @@ const Paragraph = styled.p`
   ${({ stats }) =>
     stats &&
     css`
+      font-size: 1.5rem;
       margin-bottom: 0;
     `};
 `;

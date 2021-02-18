@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import React from "react";
-import Button from "../atoms/Button";
-import Title from "../atoms/Title";
-import Paragraph from "../atoms/Paragraph";
-import breakpoint from "../../theme/breakpoints";
+import Button from "components/atoms/Button";
+import Title from "components/atoms/Title";
+import Paragraph from "components/atoms/Paragraph";
+import breakpoint from "theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
   align-self: center;
   position: absolute;
   width: 100%;
-  top: 5%;
+  top: 10%;
 
   @media ${breakpoint.device.sm} {
     top: 10%;
@@ -35,17 +35,15 @@ const GameTitle = ({
         <Title result>Draw</Title>
       ) : (
         <Title result>
-          {" "}
           Player {player1.gameWinner ? player1.name : player2.name} Wins
         </Title>
       )}
-      <Button onClick={setPlayAgain}>Play Again</Button>
+      <Button onClick={setPlayAgain} result >Play Again</Button>
     </StyledWrapper>
   ) : (
     <StyledWrapper>
-      <Title turnTitle>
-        Turn: <Paragraph color={color}>{name}</Paragraph>
-      </Title>
+        <Title turnTitle>Turn: </Title>
+        <Paragraph color={color}>{name}</Paragraph>
     </StyledWrapper>
   );
 

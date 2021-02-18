@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import breakpoints from "theme/breakpoints";
+
 
 const GlobalStyle = createGlobalStyle`
   @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap");
@@ -18,7 +20,16 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  html{
+    font-size: 62.5%;
+  }
 
+  circle{
+    @media ${breakpoints.device.xs} {
+      r: 30;
+      stroke-width: 17;
+    }
+  }
 
 `;
 

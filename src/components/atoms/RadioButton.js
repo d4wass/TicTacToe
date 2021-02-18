@@ -40,6 +40,7 @@ const StyledInput = styled.input`
 const StyledLabel = styled.label`
   position: relative;
   cursor: pointer;
+  font-size: 1.5rem;
 `;
 
 const RadioButton = ({ player, handleInput, figure, id }) => (

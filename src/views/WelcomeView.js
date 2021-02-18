@@ -1,18 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
-import { MyContext } from "../context";
-import Title from "../components/atoms/Title";
-import breakpoint from "../theme/breakpoints";
+import { MyContext } from "context";
+import Title from "components/atoms/Title";
+import breakpoint from "theme/breakpoints";
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100vw;
   height: 100vh;
   background-color: #2ab7ca;
+
+  @media ${breakpoint.device.xs} {
+    justify-content: center;
+  }
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -23,7 +27,7 @@ const StyledButtonWrapper = styled.div`
 
   @media ${breakpoint.device.xs} {
     flex-direction: row;
-    width: 50%;
+    margin-top: 30px;
   }
 `;
 
@@ -36,6 +40,7 @@ const StyledButtonLink = styled.a`
   font-weight: 700;
   margin: 10px;
   text-align: center;
+  font-size: ${({theme}) => theme.fontSize.button};
 `;
 
 const WelcomeView = () => (

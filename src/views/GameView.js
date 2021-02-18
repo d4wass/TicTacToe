@@ -34,11 +34,6 @@ const GameViews = () => (
               gameTitle
             />
           )}
-          {state.player1.turn ? (
-            <GameTitle name={state.player1.name} color='primary' />
-          ) : state.player2.turn ? (
-            <GameTitle name={state.player2.name} color='secondary' />
-          ) : null}
         </StyledWrapper>
       );
     }}

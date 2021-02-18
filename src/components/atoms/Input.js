@@ -11,11 +11,12 @@ const StyledWrapper = styled.div`
 const StyledLabel = styled.label`
   display: block;
   position: absolute;
-  top: 35%;
+  top: 15%;
   left: 0;
   pointer-events: none;
   transition: 0.3s;
   color: ${({ theme }) => theme.whiteColor};
+  font-size: ${({theme}) => theme.fontSize.label};
 `;
 
 const StyledBar = styled.span`
@@ -40,7 +41,7 @@ const StyledInput = styled.input`
 
   &:focus + ${StyledLabel} {
     transform: translateY(-35px);
-    font-size: ${({ theme }) => theme.fontSize.label};
+    font-size: 1.2rem;
     color: ${({ theme }) => theme.whiteColor};
   }
 
@@ -53,7 +54,7 @@ const StyledInput = styled.input`
     css`
       &:valid + ${StyledLabel} {
         transform: translateY(-35px);
-        font-size: ${({ theme }) => theme.fontSize.label};
+        font-size: 1.2rem;
         color: ${({ theme }) => theme.yellowColor};
       }
     `}

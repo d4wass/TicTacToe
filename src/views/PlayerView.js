@@ -21,6 +21,7 @@ const StyledWrapper = styled.div`
 const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 40px 0;
 
   @media ${breakpoint.device.xs} {
     flex-direction: row;
@@ -28,7 +29,8 @@ const StyledFormWrapper = styled.form`
 `;
 
 const StyledButton = styled(Button)`
-  max-width: 250px;
+  max-width: 210px;
+  width: 100%;
   background-color: #fe4a49;
   font-weight: 700;
   color: #f4f4f8;
@@ -64,6 +66,9 @@ const PlayerView = () => (
         ) {
           const message = "please choose symbols for players";
           handleModal(message);
+        } else if (!player1.name && !player2.name) {
+          const message = "please enter players names";
+          handleModal(message);
         }
       };
 
@@ -79,7 +84,7 @@ const PlayerView = () => (
       return (
         <StyledWrapper>
           {context.state.isModalOpen && <AlertModal />}
-          <Title setting>Players Settings</Title>
+          <Title>Players Settings</Title>
           <StyledFormWrapper>
             <PlayerSettings
               id='player1'
@@ -101,7 +106,7 @@ const PlayerView = () => (
             to={() => handleSubmit()}
             onClick={handleFormValidation}
           >
-            Save it
+            Play
           </StyledButton>
         </StyledWrapper>
       );

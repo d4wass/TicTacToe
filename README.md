@@ -15,7 +15,11 @@ Application avalaible on https://tictactoe-damndev.netlify.app/
 
 ## General info
 
-Project realized in React (CRA) to improving abilities of programing with React. The game has two options of playing, player vs. player and player vs. computer. Which has implemented simple [minmax algorithm](https://en.wikipedia.org/wiki/Minimax) for game computer. To getting more "life" to app I added some animation using gsap library.
+TicTacToe project realized in JS/React to improving skills in: RWD, styling with CSS-in-JS using SCSS and Styled-components.
+
+The game has two options of playing, player vs. player and player vs. computer. Which has implemented simple [minmax algorithm](https://en.wikipedia.org/wiki/Minimax) for game computer.
+
+To getting more "life" to app I added some animation using gsap library.
 
 ## Technologies
 

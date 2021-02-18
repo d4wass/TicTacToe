@@ -1,12 +1,12 @@
 # TicTacToe (with unbeatable AI - minmax algorithm)
 
-A simple game of TicTacToe with options play (player vs player, player vs computer).
+A simple game of TicTacToe with options of playing (player vs player, player vs computer).
 
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [General info](#general-info)
 - [Technologies](#technologies)
-- [Live Demo](#live-demo)
 - [Setup](#setup)
 
 ## Live Demo

@@ -2,7 +2,7 @@
 
 A simple game of TicTacToe with options of playing (player vs player, player vs computer).
 
-**Status:** Finished
+**Status:** Finished :white_check_mark:
 
 ## Table of Contents
 
